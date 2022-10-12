@@ -1,0 +1,26 @@
+@import "./src/scss/vars";
+
+.item {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    height: 60px;
+    width: 100%;
+
+    color: #ffffff;
+    text-decoration: none;
+
+    background-color: $pink;
+
+    border-top: 1px solid #ffffff;
+}
+
+@media (min-width: $desktop-with) {
+    .item {
+        width: auto;
+        border: none;
+
+        margin-left: 20px;
+    }
+}

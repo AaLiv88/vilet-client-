@@ -1,0 +1,74 @@
+@import "src/scss/vars";
+
+.root {
+    height: 60px;
+    background-color: $pink;
+    z-index: 10;
+}
+
+.content {
+    display: flex;
+    justify-content: space-between;
+    height: 100%;
+}
+
+.navList {
+    position: absolute;
+    top: 60px;
+
+    display: none;
+
+    width: 100%;
+}
+
+.navListActive {
+    display: block;
+}
+
+.thisPage {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    margin: 0 auto;
+
+    color: #ffffff;
+}
+
+.toggle {
+    position: absolute;
+    top: 0;
+    right: 10px;
+
+    width: 60px;
+    height: 60px;
+
+    background-color: transparent;
+    border: none;
+}
+
+@media (min-width: $desktop-with) {
+
+    .content {
+        max-width: $maxWidth;
+        margin: 0 auto;
+    }
+
+    .content {
+        display: flex;
+    }
+
+    .toggle {
+        display: none;
+    }
+
+    .navList {
+        position: static;
+        display: flex;
+    }
+
+    .thisPage {
+        margin: 0;
+        display: none;
+    }
+}
