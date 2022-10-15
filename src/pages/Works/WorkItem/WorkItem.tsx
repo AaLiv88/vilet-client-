@@ -2,6 +2,7 @@ import React, { FC } from 'react';
 import { IWork } from "../../../models/IWork";
 import cl from "./WorkItem.module.scss";
 import { useNavigate } from "react-router-dom";
+import { RoutesPathEnum } from "../../../router/routes";
 
 interface CatalogItemProps {
     work: IWork;
@@ -12,7 +13,7 @@ const WorkItem: FC<CatalogItemProps> = ({ work }) => {
 
     const onItemClick = (id: number) => {
         return () => {
-            navigate("/works/" + id);
+            navigate(RoutesPathEnum.worksItem + id);
         }
     }
 

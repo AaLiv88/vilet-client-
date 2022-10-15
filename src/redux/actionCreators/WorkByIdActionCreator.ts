@@ -6,7 +6,7 @@ export const WorkByIdActionCreator = {
     fetch: (id: string) => async (dispatch: AppDispatch) => {
         try {
             dispatch(workByIdFetch());
-            const { data } = await $host.get("/api/work/" + id);
+            const { data } = await $host.get("/api/work/item/" + id);
             dispatch(workByIdFetchSuccess(data));
         } catch (error: any) {
             workByIdFetchError(error.message);

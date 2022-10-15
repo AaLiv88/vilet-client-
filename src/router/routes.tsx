@@ -10,11 +10,15 @@ export interface IRoute {
     name?: string;
 }
 
+export enum RoutesPathEnum  {
+    worksItem = "/works/item/",
+}
+
 export const routes: IRoute[] = [
     { path: "/", element: <MainPage/>, name: "Главная" },
     { path: "/shop", element: <ShopPage/>, name: "Купить" },
     { path: "/works", element: <WorksPage/>, name: "Наши работы" },
-    { path: "/works/:id", element: <WorkByIdPage/> },
+    { path: RoutesPathEnum.worksItem + ":id", element: <WorkByIdPage/> },
 ];
 
 export const privateRoutes: IRoute[] = [
