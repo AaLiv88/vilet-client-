@@ -2,6 +2,7 @@ import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 import { viewWidthEnum } from "../../utils/viewWidth";
 import { IRoute } from "../../router/routes";
 import { IUser } from "../../models/IUser";
+import { localStorageKeyToken } from "../../utils/consts";
 
 interface UserState {
     viewWidth: number;
@@ -48,7 +49,7 @@ const userSlice = createSlice({
             state.thisPage = action.payload;
         },
         logOut(state: UserState) {
-            localStorage.removeItem("token");
+            localStorage.removeItem(localStorageKeyToken);
             state.user = {} as IUser;
             state.isAuth = false;
             state.isLoading = false;

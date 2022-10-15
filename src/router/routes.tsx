@@ -6,21 +6,25 @@ import WorkByIdPage from "../pages/WorkByIdPage/WorkByIdPage";
 
 export interface IRoute {
     element: JSX.Element;
-    path: string;
+    path: RoutesPathEnum | `${RoutesPathEnum}:id`;
     name?: string;
 }
 
 export enum RoutesPathEnum  {
     worksItem = "/works/item/",
+    shop = "/shop",
+    works = "/works",
+    main = "/",
+    admin = "/admin",
 }
 
 export const routes: IRoute[] = [
-    { path: "/", element: <MainPage/>, name: "Главная" },
-    { path: "/shop", element: <ShopPage/>, name: "Купить" },
-    { path: "/works", element: <WorksPage/>, name: "Наши работы" },
-    { path: RoutesPathEnum.worksItem + ":id", element: <WorkByIdPage/> },
+    { path: RoutesPathEnum.main, element: <MainPage/>, name: "Главная" },
+    { path: RoutesPathEnum.shop, element: <ShopPage/>, name: "Купить" },
+    { path: RoutesPathEnum.works, element: <WorksPage/>, name: "Наши работы" },
+    { path:`${RoutesPathEnum.worksItem}:id`, element: <WorkByIdPage/> },
 ];
 
 export const privateRoutes: IRoute[] = [
-    { path: "/admin", element: <AdminPage/>, name: "панель админа" }
+    { path: RoutesPathEnum.admin, element: <AdminPage/>, name: "панель админа" }
 ]
