@@ -3,7 +3,7 @@ import jwtDecode from "jwt-decode";
 import { setUserError, setUserIsLoading, setUser } from "../slices/userSlice";
 import { IUser } from "../../models/IUser";
 import { AppDispatch } from "../store";
-
+import { localStorageKeyToken } from "../../utils/consts";
 
 const UserActionCreators = {
     registration: (email: string, password: string, phone: string, name: string) => async (dispatch: AppDispatch) => {
@@ -13,7 +13,7 @@ const UserActionCreators = {
             const user: IUser = jwtDecode(data.token);
             dispatch(setUser(user));
 
-            localStorage.setItem("token", data.token);
+            localStorage.setItem(localStorageKeyToken, data.token);
 
         } catch (error: any) {
             dispatch(setUserError(error.response.data.message));
@@ -23,14 +23,19 @@ const UserActionCreators = {
         try {
             dispatch(setUserIsLoading(true));
             const { data } = await $host.post("api/user/login", { login, password });
+            console.log(data);
             const user: IUser = jwtDecode(data.token);
             dispatch(setUser(user));
 
-            localStorage.setItem("token", data.token);
+            localStorage.setItem(localStorageKeyToken, data.token);
 
         } catch (error: any) {
             dispatch(setUserError(error.response.data.message));
         }
+    },
+    logOut: () => async (dispatch: AppDispatch) => {
+        dispatch(setUser({} as IUser));
+        localStorage.removeItem(localStorageKeyToken);
     },
     checkIsAuth: () => async (dispatch: AppDispatch) => {
         try {
@@ -39,13 +44,13 @@ const UserActionCreators = {
             const user: IUser = jwtDecode(data.token);
             dispatch(setUser(user));
 
-            localStorage.setItem("token", data.token);
+            localStorage.setItem(localStorageKeyToken, data.token);
 
         } catch (error: any) {
-            localStorage.removeItem("token")
+            localStorage.removeItem(localStorageKeyToken);
             dispatch(setUserError(error.response.data.message));
         }
     },
 }
 
-export const { registration, login, checkIsAuth } = UserActionCreators;
+export const { registration, login, checkIsAuth, logOut } = UserActionCreators;

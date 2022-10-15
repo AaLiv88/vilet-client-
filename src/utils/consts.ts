@@ -1,0 +1,1 @@
+export const localStorageKeyToken = `${process.env.REACT_APP_LOCAL_STORAGE_TOKEN}`;
