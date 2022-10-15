@@ -1,6 +1,5 @@
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 import { viewWidthEnum } from "../../utils/viewWidth";
-import { IRoute } from "../../router/routes";
 import { IUser } from "../../models/IUser";
 import { localStorageKeyToken } from "../../utils/consts";
 
@@ -9,7 +8,6 @@ interface UserState {
     isDesktop: boolean;
     isMobile: boolean;
     isTablet: boolean;
-    thisPage: null | IRoute;
 
     isAuth: boolean;
     isLoading: boolean;
@@ -22,7 +20,6 @@ const initialState: UserState = {
     isDesktop: false,
     isMobile: false,
     isTablet: false,
-    thisPage: null,
 
     isAuth: false,
     isLoading: false,
@@ -44,9 +41,6 @@ const userSlice = createSlice({
             } else {
                 state.isDesktop = true;
             }
-        },
-        setThisPage(state: UserState, action: PayloadAction<IRoute>) {
-            state.thisPage = action.payload;
         },
         logOut(state: UserState) {
             localStorage.removeItem(localStorageKeyToken);
@@ -70,5 +64,5 @@ const userSlice = createSlice({
     }
 });
 
-export const { setViewWidth, setThisPage, setUser, setUserIsLoading, setUserError } = userSlice.actions;
+export const { setViewWidth, setUser, setUserIsLoading, setUserError } = userSlice.actions;
 export default userSlice.reducer;
