@@ -4,6 +4,8 @@ import AppRouter from "./router/AppRouter";
 import { useAppDispatch } from "./hooks/redux";
 import { setViewWidth } from "./redux/slices/userSlice";
 import { checkIsAuth } from "./redux/actionCreators/UserActionCreators";
+import Spinner from "./components/Spinner/Spinner";
+import ErrorAndLoadingHandler from "./components/ErrorAndLoadingHandler/ErrorAndLoadingHandler";
 
 function App() {
     const dispatch = useAppDispatch();
@@ -16,7 +18,9 @@ function App() {
 
     return (
         <>
+            {/*<Spinner/>*/}
             <AppRouter/>
+            {/*<ErrorAndLoadingHandler loadingConditions={["123", "1"], []} errorCondition={["123"]}/>*/}
         </>
     );
 }
