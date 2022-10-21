@@ -6,12 +6,13 @@ import cl from "./WorksPage.module.scss";
 import { WorksCategoriesActionCreator } from "../../redux/actionCreators/worksCategoriesActionCreator";
 import { IWorkCategory } from "../../models/IWorkCategory";
 import { setSelectedWorksCategory } from "../../redux/slices/worksCategoriesSlice";
-import Spinner from "../../components/Spinner/Spinner";
+import { ErrorAndLoadingHandler } from "../../utils/ErrorAndLoadingHandler";
 
 const WorksPage = () => {
     const dispatch = useAppDispatch();
-    const { isLoading: worksLoading } = useAppSelector(state => state.work);
+    const { isLoading: worksLoading, error: worksError } = useAppSelector(state => state.work);
     const {
+        error: categoriesError,
         isLoading: categoriesLoading,
         categories,
         selectedCategory
@@ -23,15 +24,11 @@ const WorksPage = () => {
     }, [selectedCategory]);
 
 
-    if (worksLoading || categoriesLoading || true) {
-        return <Spinner/>
-    }
-
     const onCategoryClick = (category: IWorkCategory) => {
         dispatch(setSelectedWorksCategory(category));
     }
 
-    return (
+    return ErrorAndLoadingHandler(worksLoading || categoriesLoading, !!worksError || !!categoriesError,
         <div className={cl.root}>
             <div className={cl.categories}>
                 {categories
@@ -48,7 +45,7 @@ const WorksPage = () => {
             </div>
             <WorksList/>
         </div>
-    );
+    )
 };
 
 export default WorksPage;

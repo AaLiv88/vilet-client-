@@ -3,19 +3,21 @@ import cl from "./Spinner.module.scss";
 
 const Spinner: FC = () => {
     return (
-        <div className={cl.spinner}>
-            <div></div>
-            <div></div>
-            <div></div>
-            <div></div>
-            <div></div>
-            <div></div>
-            <div></div>
-            <div></div>
-            <div></div>
-            <div></div>
-            <div></div>
-            <div></div>
+        <div className={cl.root}>
+            <div className={cl.spinner}>
+                <div></div>
+                <div></div>
+                <div></div>
+                <div></div>
+                <div></div>
+                <div></div>
+                <div></div>
+                <div></div>
+                <div></div>
+                <div></div>
+                <div></div>
+                <div></div>
+            </div>
         </div>
     );
 };

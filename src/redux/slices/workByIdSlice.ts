@@ -4,13 +4,13 @@ import { IWorkById } from "../../models/IWorkById";
 interface WorkByIdState {
     isLoading: boolean;
     error: string;
-    work: IWorkById;
+    work: IWorkById | null;
 }
 
 const initialState: WorkByIdState = {
     isLoading: false,
     error: "",
-    work: {} as IWorkById,
+    work: null,
 }
 
 const workByIdSlice = createSlice({
@@ -20,7 +20,7 @@ const workByIdSlice = createSlice({
         workByIdFetch(state: WorkByIdState) {
             state.isLoading = true;
             state.error = "";
-            state.work = {} as IWorkById;
+            state.work = null;
         },
         workByIdFetchSuccess(state: WorkByIdState, action: PayloadAction<IWorkById>) {
             state.isLoading = false;

@@ -7,13 +7,13 @@ import Container from "./Container/Container";
 const PageLayout: FC = () => {
 
     return (
-        <div>
+        <>
             <Navbar/>
 
             <Container>
                 <Outlet/>
             </Container>
-        </div>
+        </>
     );
 };
 

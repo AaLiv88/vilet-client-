@@ -12,6 +12,7 @@ const AppRouter: FC = () => {
                         path={route.path}
                         key={route.path}
                         element={route.element}
+
                     />
                 )}
                 {privateRoutes.map(route =>
