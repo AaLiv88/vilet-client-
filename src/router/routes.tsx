@@ -26,5 +26,5 @@ export const routes: IRoute[] = [
 ];
 
 export const privateRoutes: IRoute[] = [
-    { path: RoutesPathEnum.admin, element: <AdminPage/>, name: "панель админа" }
+    { path: RoutesPathEnum.admin, element: <h1/>, name: "панель админа" }
 ]

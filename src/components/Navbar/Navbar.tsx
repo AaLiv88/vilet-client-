@@ -1,9 +1,9 @@
 import React, { FC, useState } from 'react';
 import NavList from "./NavList/NavList";
 import cl from "./Navbar.module.scss";
-import burger from "../../assets/burger.svg";
-import close from "../../assets/close.svg";
-import logo from "../../assets/logitip.svg";
+import burger from "../../assets/images/burger.svg";
+import close from "../../assets/images/close.svg";
+import logo from "../../assets/images/logitip.svg";
 
 const Navbar: FC = () => {
     const [isVisible, setIsVisible] = useState(false);
