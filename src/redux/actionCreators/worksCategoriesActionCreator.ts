@@ -1,5 +1,5 @@
 import { $host } from "../../http";
-import { AppDispatch } from "./../store";
+import { AppDispatch } from "../store";
 import { worksCategoriesFetch, worksCategoriesFetchError, worksCategoriesFetchSuccess } from "../slices/worksCategoriesSlice";
 
 export const WorksCategoriesActionCreator = {

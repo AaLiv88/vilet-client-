@@ -1,11 +1,23 @@
 .categories {
     display: flex;
+    flex-wrap: wrap;
     width: 100%;
+
+    margin-top: 16px;
 }
 
 .item {
-    margin-right: 20px;
+    display: flex;
+    justify-content: center;
+
+    text-align: left;
     opacity: 0.5;
+
+    width: 100%;
+}
+
+.itemText {
+    min-width: 120px;
 }
 
 .itemActive {

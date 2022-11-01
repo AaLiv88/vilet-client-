@@ -1,5 +1,5 @@
 import { $host } from "../../http";
-import { AppDispatch } from "./../store";
+import { AppDispatch } from "../store";
 import { worksFetch, worksFetchError, worksFetchSuccess } from "../slices/worksSlice";
 import { IWorkCategory } from "../../models/IWorkCategory";
 

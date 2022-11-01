@@ -1,5 +1,5 @@
 import { $host } from "../../http";
-import { AppDispatch } from "./../store";
+import { AppDispatch } from "../store";
 import { workByIdFetch, workByIdFetchError, workByIdFetchSuccess } from "../slices/workByIdSlice";
 
 export const WorkByIdActionCreator = {

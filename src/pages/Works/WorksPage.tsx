@@ -6,11 +6,14 @@ import cl from "./WorksPage.module.scss";
 import { WorksCategoriesActionCreator } from "../../redux/actionCreators/worksCategoriesActionCreator";
 import { ErrorAndLoadingHandler } from "../../utils/ErrorAndLoadingHandler";
 import WorksCategoriesList from "./WorksCategoriesList/WorksCategoriesList";
+import WorksTitle from "./WorksTitle/WorksTitle";
+import Dropdown from "../../components/Dropdown/Dropdown";
 
 const WorksPage = () => {
     const dispatch = useAppDispatch();
     const { isLoading: worksLoading, error: worksError } = useAppSelector(state => state.work);
     const {
+        categories,
         error: categoriesError,
         isLoading: categoriesLoading,
         selectedCategory
@@ -23,7 +26,11 @@ const WorksPage = () => {
 
     return ErrorAndLoadingHandler(worksLoading || categoriesLoading, !!worksError || !!categoriesError,
         <div className={cl.root}>
-            <WorksCategoriesList/>
+            <Dropdown
+                selectedItem={selectedCategory}
+                arr={[{ name: "все работы", id: "0" }].concat(categories)}
+            />
+            {/*<WorksTitle/>*/}
             <WorksList/>
         </div>
     )

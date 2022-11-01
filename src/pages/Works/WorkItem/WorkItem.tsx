@@ -19,8 +19,10 @@ const WorkItem: FC<CatalogItemProps> = ({ work }) => {
 
     return (
         <div className={cl.item} onClick={onItemClick(work.id)}>
-            <img src={`${process.env.REACT_APP_API_URL}/${work.mainImageUrl}`} alt="Пример нашей работы"/>
-            <div>{work.name}</div>
+            <div className={cl.imageWrapper}>
+                <img className={cl.image} src={`${process.env.REACT_APP_API_URL}/${work.mainImageUrl}`} alt="Пример нашей работы"/>
+            </div>
+            <div className={cl.name}>{work.name}</div>
         </div>
     );
 };

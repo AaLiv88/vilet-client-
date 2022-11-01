@@ -1,0 +1,19 @@
+@import "./src/scss/vars";
+
+@media(min-width: $tablet-width) {
+    .list {
+        display: grid;
+        grid-auto-columns: 1fr;
+        grid-template-columns: 1fr 1fr;
+        gap: 20px;
+    }
+}
+
+@media(min-width: $desktop-with) {
+    .list {
+        display: grid;
+        grid-auto-columns: 1fr;
+        grid-template-columns: 1fr 1fr 1fr;
+        gap: 25px;
+    }
+}
