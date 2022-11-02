@@ -3,6 +3,7 @@ import { IWork } from "../../../models/IWork";
 import cl from "./WorkItem.module.scss";
 import { useNavigate } from "react-router-dom";
 import { RoutesPathEnum } from "../../../router/routes";
+import WorkImage from "../../../components/WorkImage/WorkImage";
 
 interface CatalogItemProps {
     work: IWork;
@@ -19,9 +20,7 @@ const WorkItem: FC<CatalogItemProps> = ({ work }) => {
 
     return (
         <div className={cl.item} onClick={onItemClick(work.id)}>
-            <div className={cl.imageWrapper}>
-                <img className={cl.image} src={`${process.env.REACT_APP_API_URL}/${work.mainImageUrl}`} alt="Пример нашей работы"/>
-            </div>
+            <WorkImage alt={"Пример нашей работы"} src={`${process.env.REACT_APP_API_URL}/${work.mainImageUrl}`}/>
             <div className={cl.name}>{work.name}</div>
         </div>
     );

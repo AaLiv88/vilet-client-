@@ -1,0 +1,40 @@
+@import "src/scss/vars";
+
+.slider {
+    display: flex;
+    align-items: start;
+    justify-content: space-between;
+
+    width: 100%;
+}
+
+.imageActive {
+    width: 77%;
+}
+
+.sideImages {
+    width: 19%;
+}
+
+.image {
+
+    &:hover {
+        opacity: 0.5;
+    }
+}
+
+.imageHidden {
+    display: none;
+}
+
+@media(min-width: $tablet-width) {
+    .slider {
+        width: 65%;
+    }
+}
+
+@media(min-width: $tablet-width) {
+    .slider {
+        width: 50%;
+    }
+}
