@@ -52,7 +52,9 @@ const Dropdown: FC<Dropdown> = ({ arr, selectedItem }) => {
                     key={item.id}
                     onClick={onSelectItem(item)}
                 >
-                    {item.name}
+                    <p className={cl.itemText}>
+                        {item.name}
+                    </p>
                 </div>
             )}
         </div>

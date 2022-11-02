@@ -5,6 +5,8 @@
 
     border: 1px solid gray;
     border-radius: 5px;
+
+    cursor: pointer;
 }
 
 .item {
@@ -14,12 +16,18 @@
     width: 100%;
 
     padding: 5px 0;
+    border-top: 1px solid #D8D8D8;
 
     text-align: center;
+}
+
+.itemText {
     opacity: 0.5;
 }
 
 .itemActive {
+    border: none;
+
     opacity: 1;
     text-transform: uppercase;
     font-size: 20px;
