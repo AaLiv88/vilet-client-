@@ -18,6 +18,7 @@ export enum RoutesPathEnum  {
     admin = "/admin",
 }
 
+//todo убрать name
 export const routes: IRoute[] = [
     { path: RoutesPathEnum.main, element: <MainPage/>, name: "Главная" },
     { path: RoutesPathEnum.shop, element: <ShopPage/>, name: "Купить" },
@@ -26,5 +27,5 @@ export const routes: IRoute[] = [
 ];
 
 export const privateRoutes: IRoute[] = [
-    { path: RoutesPathEnum.admin, element: <h1/>, name: "панель админа" }
+    { path: RoutesPathEnum.admin, element: <AdminPage/>, name: "панель админа" }
 ]

@@ -1,78 +1,101 @@
-import React, { FC, useState } from 'react';
-// import { Button, Form, Input, Modal, Upload } from "antd";
-// import { UploadOutlined } from '@ant-design/icons';
+import React, { FC, useEffect, useRef, useState } from 'react';
 import { $authHost } from "../../../http";
-
-
-//todo переделывать !!!!
+import { IWork } from "../../../models/IWork";
+import Modal from "../../../components/Modal/Modal";
+import cl from "./AddWork.module.scss";
+import Dropdown from "../../../components/Dropdown/Dropdown";
+import { useAppDispatch, useAppSelector } from "../../../hooks/redux";
+import { ErrorAndLoadingHandler } from "../../../utils/ErrorAndLoadingHandler";
+import { WorksCategoriesActionCreator } from "../../../redux/actionCreators/worksCategoriesActionCreator";
 
 const AddWork: FC = () => {
+    const dispatch = useAppDispatch();
+
+    const { categories, error, isLoading, selectedCategory } = useAppSelector(state => state.workCategories);
+
     const [isVisible, setIsVisible] = useState(false);
     const [name, setName] = useState("");
     const [description, setDescription] = useState("");
-    const [image, setImage] = useState<any>(null);
+    // const [categoryId, setCategoryId] = useState(NaN);
+    const [images, setImages] = useState<File[]>([]);
 
-    const onSubmit = async () => {
+    useEffect(() => {
+        dispatch(WorksCategoriesActionCreator.fetch());
+    }, []);
+
+    const createImages = async (image: File, id: number) => {
         const formData = new FormData();
-        formData.append("name", name);
-        formData.append("description", description);
-        formData.append("worksCategoryId", `${7}`);
-        if (image) {
-            formData.append("img", image);
-        }
-        const response = await $authHost.post("api/work", formData);
+        formData.append("img", image);
+        formData.append("workId", `${id}`);
+        const response = await $authHost.post("api/image", formData);
+        console.log(response);
     }
 
-    return (
+    const handleChange = async (e: React.ChangeEvent<HTMLInputElement>) => {
+        if (!e.target.files) {
+            return;
+        }
+        setImages(Array.from(e.target.files));
+    }
+
+    const onSubmit = async () => {
+        const { data } = await $authHost.post<IWork>("api/work", {
+            name,
+            description,
+            worksCategoryId: selectedCategory.id,
+        });
+        images.map(image => createImages(image, data.id));
+        setIsVisible(false);
+    }
+
+    return ErrorAndLoadingHandler(!!isLoading, !!error,
         <>
-            {/*<button onClick={() => setIsVisible(true)}>*/}
-            {/*    добавить*/}
-            {/*</button>*/}
-            {/*<Modal*/}
-            {/*    open={isVisible}*/}
-            {/*    title="Добавить пример работ"*/}
-            {/*    footer={null}*/}
-            {/*    onCancel={() => setIsVisible(false)}*/}
-            {/*>*/}
-            {/*    <Form*/}
-            {/*        name="basic"*/}
-            {/*        labelCol={{ span: 8 }}*/}
-            {/*        wrapperCol={{ span: 16 }}*/}
-            {/*        initialValues={{ remember: true }}*/}
-            {/*        autoComplete="off"*/}
-            {/*    >*/}
-            {/*        <Form.Item*/}
-            {/*            label="название"*/}
-            {/*            name="name"*/}
-            {/*            rules={[{ required: true, message: 'Укажите название работы' }]}*/}
-            {/*        >*/}
-            {/*            <Input value={name} onChange={e => setName(e.target.value)}/>*/}
-            {/*        </Form.Item>*/}
+            <button
+                onClick={e => {
+                    setIsVisible(true);
+                    e.stopPropagation();
+                }}
+            >
+                Добавить работу
+            </button>
 
-            {/*        <Form.Item*/}
-            {/*            label="описание"*/}
-            {/*            name="description"*/}
-            {/*            rules={[{ required: true, message: 'Укажите описание!' }]}*/}
-            {/*        >*/}
-            {/*            <Input value={name} onChange={e => setDescription(e.target.value)}/>*/}
-            {/*        </Form.Item>*/}
-
-            {/*        /!*<Upload>*!/*/}
-            {/*        /!*    <Button icon={<UploadOutlined />}>Click to Upload</Button>*!/*/}
-            {/*        /!*</Upload>*!/*/}
-
-            {/*        <input type={"file"} onChange={e => setImage(e.target.files)}/>*/}
-
-            {/*        <Form.Item wrapperCol={{ offset: 8, span: 16 }}>*/}
-            {/*            <Button type="primary" htmlType="submit" onClick={onSubmit}>*/}
-            {/*                Submit*/}
-            {/*            </Button>*/}
-            {/*        </Form.Item>*/}
-
-            {/*    </Form>*/}
-            {/*</Modal>*/}
+            <Modal
+                onModalClose={() => setIsVisible(false)}
+                isVisible={isVisible}
+            >
+                <div className={cl.form}>
+                    <input
+                        multiple={true}
+                        type="file"
+                        className={cl.formItem}
+                        onChange={handleChange}
+                    />
+                    <input
+                        type="text"
+                        placeholder="название"
+                        value={name}
+                        onChange={e => setName(e.target.value)}
+                    />
+                    <input
+                        type="описание"
+                        placeholder="название"
+                        value={description}
+                        onChange={e => setDescription(e.target.value)}
+                    />
+                    <Dropdown
+                        arr={categories}
+                        initialItem={categories[0]}
+                    />
+                    <button
+                        onClick={onSubmit}
+                        className={cl.formItem}
+                    >
+                        Cоздать
+                    </button>
+                </div>
+            </Modal>
         </>
-    );
+    )
 };
 
 export default AddWork;

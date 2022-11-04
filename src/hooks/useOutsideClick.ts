@@ -1,8 +1,8 @@
-import { Ref, useEffect } from "react";
+import { JSXElementConstructor, ReactElement, Ref, useEffect } from "react";
 
 
 //todo пеоеписать с useLatest по видосу с .туба
-export const useOutsideClick = (elementRef: any, handler: any, attached: any = true) => {
+export const useOutsideClick = (elementRef: any, handler: () => void, attached: boolean = true) => {
     // const latestHandler = useLatest(handler);
 
     useEffect(() => {
@@ -13,6 +13,12 @@ export const useOutsideClick = (elementRef: any, handler: any, attached: any = t
             if (!elementRef.current.contains(e.target)) {
                 handler();
             }
+            // elementRef.forEach(ref => {
+            //     if (!ref.current) return;
+            //     if (!ref.current.contains(e.target)) {
+            //         handler();
+            //     }
+            // })
         };
 
         document.addEventListener("click", handleClick);

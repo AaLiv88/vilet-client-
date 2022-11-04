@@ -4,7 +4,7 @@ import AdminForm from "./AdminForm/AdminForm";
 import AdminPanel from "./AdminPanel/AdminPanel";
 
 const AdminPage = () => {
-    const { user, isAuth } = useAppSelector(state => state.user);
+    const { user } = useAppSelector(state => state.user);
 
     return (
         <>

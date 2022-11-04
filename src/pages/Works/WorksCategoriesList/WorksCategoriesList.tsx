@@ -17,7 +17,7 @@ const WorksCategoriesList: FC = () => {
     return (
         <>
             <Dropdown
-                selectedItem={selectedCategory}
+                initialItem={selectedCategory}
                 arr={[{ name: "все работы", id: "0" }].concat(categories)}
             />
 

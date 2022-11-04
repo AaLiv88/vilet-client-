@@ -8,19 +8,23 @@ import { useOutsideClick } from "../../hooks/useOutsideClick";
 
 interface Dropdown {
     arr: IWorkCategory[];
-    selectedItem: IWorkCategory;
+    initialItem: IWorkCategory;
 }
 
-const Dropdown: FC<Dropdown> = ({ arr, selectedItem }) => {
+//todo переделать компонент функция должна приходить из пропсов
+const Dropdown: FC<Dropdown> = ({ arr, initialItem }) => {
     const dispatch = useAppDispatch();
     const dropdownRef = useRef(null);
     const [isVisible, setIsVisible] = useState(false);
-
+    const [selectedItem, setSelectedItem] = useState(initialItem);
+    
+    //todo убрать stopPropagation
     const onSelectItem = (item: IWorkCategory) => {
-        return () => {
+        return (e: any) => {
             dispatch(setSelectedWorksCategory(item));
-            selectedItem = item;
+            setSelectedItem(item);
             setIsVisible(false);
+            e.stopPropagation();
         }
     }
 
